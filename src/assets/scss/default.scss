@@ -1,0 +1,41 @@
+body {
+  background: var(--bg-color);
+  color: var(--font-color);
+}
+
+input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  outline-style: none;
+
+  background: var(--input-bg);
+  border: var(--border);
+  border-radius: var(--border-radius);
+  color: var(--input-c);
+}
+
+input::-webkit-inner-spin-button {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+}
+
+button {
+  border: var(--border);
+  border-radius: var(--border-radius);
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+@keyframes riseUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

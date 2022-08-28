@@ -11,7 +11,8 @@ interface compoundData {
 }
 
 const principal = ref("10000000");
-const period = ref(20);
+const period_input = ref(20);
+const period = ref(0);
 const _rate = ref(5);
 const result = ref<compoundData[]>([]);
 const currency = ref("원");
@@ -21,6 +22,8 @@ const totalAmount = ref(0);
 
 const cal = function () {
   show.value = false;
+  totalProfit.value = 0;
+  period.value = period_input.value;
 
   result.value = [];
   const start = Number(principal.value.replace(/,/g, ""));
@@ -78,7 +81,7 @@ onMounted(() => {
         </div>
         <div class="input-wrapper">
           <label for="period">복리기간</label>
-          <input type="number" id="period" v-model="period" />
+          <input type="number" id="period" v-model="period_input" />
         </div>
         <div class="input-wrapper">
           <label for="rate">수익률</label>
@@ -130,7 +133,6 @@ onMounted(() => {
   width: 100%;
   display: flex;
   flex-direction: column;
-  background-color: $background-color-main;
   padding-top: 60px;
   .table-wrapper {
     display: flex;
@@ -148,19 +150,18 @@ onMounted(() => {
         margin: 25px;
         label {
           font-size: 20px;
-          font-weight: 300;
+          font-weight: var(--font-weight-b);
           padding-bottom: 1px;
           width: 120px;
           text-align: center;
         }
         input {
-          background-color: $background-color-main;
           height: 36px;
           padding: 0 16px;
           transition: 0.2s;
 
           &:focus-visible {
-            border-color: $focus-color;
+            border-color: var(--input-focus);
           }
         }
       }
@@ -169,15 +170,20 @@ onMounted(() => {
         height: 36px;
         width: 160px;
         margin: 25px;
-        border: $border;
-        box-shadow: $box-shadow;
-        border-radius: $border-radius;
-        background-color: $focus-color;
-        color: $focus-fontColor;
         cursor: pointer;
         font-size: 16px;
+        // background: var(--btn-bg);
+        background: var(--bg-color);
+        color: var(--font-color);
+        border: var(--btn-border);
+        // border: var(--border);
+
+        // box-shadow: var(--box-shadow);
         &:hover {
-          box-shadow: $box-shadow-hover;
+          // box-shadow: var(--box-shadow-hover);
+          background: var(--btn-bg);
+          transition: all 0.4s;
+          color: var(--c-white);
         }
       }
     }
@@ -187,12 +193,12 @@ onMounted(() => {
     flex-direction: column;
     justify-content: center;
     margin: 25px auto;
-    background-color: $background-color-second;
-    border: $border;
-    box-shadow: $box-shadow;
-    color: $font-color;
-    border-radius: $border-radius;
+    background: var(--bg-color-2);
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius);
     animation: riseUp 1s;
+
     .box {
       margin: 25px 25px 0;
       display: flex;
@@ -211,7 +217,7 @@ onMounted(() => {
     }
     table {
       margin: 25px;
-      border: $border;
+      border: var(--border);
       border-collapse: collapse;
       text-align: center;
       font-size: 14px;
@@ -221,14 +227,19 @@ onMounted(() => {
         &:nth-child(1) {
           width: 80px;
         }
-        // &:nth-child(3) {
-        //   width: 360px;
-        // }
       }
       th,
       td {
-        border: $border;
+        border: var(--border);
+
         font-weight: 300;
+      }
+      th {
+        padding: 3px 0;
+      }
+      td {
+        color: var(--font-color-2);
+        padding: 2px 0;
       }
     }
   }
